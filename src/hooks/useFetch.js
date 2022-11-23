@@ -15,6 +15,7 @@ export const useFetch = (items, deps = []) => {
         hasError: false
     })
 
+    
     useEffect(() => {
         try {
             Promise.all(items.map((item) => getService.get(item, {
@@ -54,6 +55,7 @@ export const useFetch = (items, deps = []) => {
         hasError: state.hasError
     };
 }
+
 
 
 

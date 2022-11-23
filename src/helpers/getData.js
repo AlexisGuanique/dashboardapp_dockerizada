@@ -41,9 +41,9 @@ export const getData = (state, testData) => {
                 {
                     key: uuidv4(),
                     direccion: item?.config?.url,
-                    status: item?.message,
+                    status: -1,
                     state: '🔴',
-                    statustext: item?.code,
+                    statustext: item?.message,
 
                 }
                 new_data.push(new_objet);
@@ -58,7 +58,7 @@ export const getData = (state, testData) => {
     ))
 
 
-    console.log(new_data);
+    // console.log(new_data);
     
     return new_data;
 }
