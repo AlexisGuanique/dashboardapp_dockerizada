@@ -1,7 +1,19 @@
 
-
-export const getStorage = ( data ) => {
+export const getStorage = ( key = '', data ) => {
     const miStorage = window.localStorage;
 
-    miStorage.setItem('data', JSON.stringify(data))
+    const setLocalStorage = (key, data) => {
+        return miStorage.setItem(key, JSON.stringify(data))
+    }
+
+
+    const getLocalStorage = ( key ) => {
+        return JSON.parse(miStorage.getItem(key));
+    }
+
+
+    return {
+        getLocalStorage,
+        setLocalStorage,
+    }
 }

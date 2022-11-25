@@ -1,8 +1,10 @@
 import { v4 as uuidv4 } from 'uuid';
+import { getCompare } from './getCompare';
 import { getStorage } from './getStorage';
 
 
 export const getData = (state, testData) => {
+
 
 
     const new_data = []
@@ -14,6 +16,9 @@ export const getData = (state, testData) => {
 
     const horaActual = (`${day}/${month}/${year} - ${hour}:${minute}:${second} h`);
 
+    const { getLocalStorage, setLocalStorage } = getStorage();
+    
+    
     // console.log(horaActual)
 
 
@@ -53,10 +58,16 @@ export const getData = (state, testData) => {
         element['servicio'] = `Servicio ${index + 1}`
     ))
 
+    // setLocalStorage('new_data', new_data);
 
-    // console.log(testData);
+    // // const dataLista = getCompare(dataStorage, new_data);
 
-    getStorage(new_data);
+    
+    // if(dataLista.length > 0) {
+    //     setLocalStorage('DataLista', dataLista)
+    // }
+    
+
 
     return new_data;
 }

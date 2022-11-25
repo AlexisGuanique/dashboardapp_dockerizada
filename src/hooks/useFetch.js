@@ -2,12 +2,17 @@ import { useState, useEffect } from "react";
 
 import { getService } from "../api/getService";
 import { getData } from "../helpers/getData";
+import { getStorage } from "../helpers/getStorage";
 
 
 const testData = [];
 
+const dataToSave = [];
+
 
 export const useFetch = (items) => {
+    const { setLocalStorage } = getStorage();
+
 
     const [state, setState] = useState({
         data: [],
@@ -26,9 +31,7 @@ export const useFetch = (items) => {
                     .catch(error => {
                         const findedElement = testData.find(element => element.config.url === error.config.url);
 
-                        // console.log('error: ' + JSON.stringify(findedElement))
-
-                        if(!findedElement) {
+                        if (!findedElement) {
                             testData.push({ ...error })
                         }
                     })))
@@ -44,7 +47,7 @@ export const useFetch = (items) => {
                     hasError: error
                 })
             }
-        }, 11000);
+        }, 12000);
     }
 
     useEffect(() => {
@@ -53,8 +56,33 @@ export const useFetch = (items) => {
 
     }, [])
 
-    // console.log(testData)
 
+    console.log(state)
+
+    const date = new Date();
+
+    const [month, day, year, hour, minute, second] = [date.getMonth(), date.getDate(), date.getFullYear(), date.getHours(), date.getMinutes(), date.getSeconds()]
+
+    const horaActual = (`${day}/${month}/${year} - ${hour}:${minute}:${second} h`);
+
+
+
+    state.data.forEach((item) => {
+        if (item && item.status === 200) {
+            const findedElement = dataToSave.find(element => element?.path === item?.config?.url);
+            if (!findedElement) {
+                dataToSave.push({
+                    path: item.config.url,
+                    status: item.status,
+                    date: horaActual
+                })
+            }
+
+        }
+    })
+
+    
+    console.log(dataToSave);
 
     const data = getData(state, testData)
 
@@ -64,10 +92,3 @@ export const useFetch = (items) => {
         hasError: state.hasError
     };
 }
-
-
-
-
-
-
-
