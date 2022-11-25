@@ -1,4 +1,4 @@
-import { Grid, IconButton, Toolbar, Typography } from '@mui/material'
+import { CircularProgress, Grid, IconButton, Toolbar, Typography } from '@mui/material'
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 
 import { Table } from "antd";
@@ -25,7 +25,9 @@ export const ViewTable = () => {
 
     const handleReload = () => {
         window.location.reload();
-    }
+    }   
+
+    
 
 
     return (
@@ -53,8 +55,16 @@ export const ViewTable = () => {
                 <Box
                     className='animate__animated animate__fadeIn animate__delay-3s'
                 >
-                    <Table columns={columns} dataSource={data} pagination={{ pageSize: 8 }} onChange={onChange} />
+                    {
+                        (!data.length)
+                        ? <CircularProgress />
+                        : <Table columns={columns} dataSource={data} pagination={{ pageSize: 8 }} onChange={onChange} />
+                    }                    
+
+
                 </Box>
+
+
 
                 <IconButton
                     onClick={handleReload}

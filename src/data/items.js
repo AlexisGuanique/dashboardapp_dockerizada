@@ -16,9 +16,9 @@ export const items = [
     'onplaceholder.typicode.com/posts',
     'breakingbadapi.com/api/quotes',
     'jsonplaceholder.typicode.com/posts',
-    'pokeapi.co/api/v2/pokemon/',
+    'ALEXI1.co/api/v2/pokemon/',
     'pokeapi.co/api/v2/pokemo/',
-    'pokeapi.co/api/v2/pokemn/',
+    'ALEXIS2.co/api/v2/pokemn/',
     'nplaceholder.typicode.com/posts',
     'onplaceholder.typicode.com/posts',
     'breakingbadapi.com/api/quotes',
@@ -70,5 +70,5 @@ export const columnas = [
 
 
 export const onChange = (pagination, filters, sorter, extra) => {
-    console.log('params', pagination, filters, sorter, extra);
+    // console.log('params', pagination, filters, sorter, extra);
 };

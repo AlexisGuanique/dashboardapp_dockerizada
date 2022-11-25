@@ -4,10 +4,10 @@ import { getService } from "../api/getService";
 import { getData } from "../helpers/getData";
 
 
-let testData = [];
+const testData = [];
 
 
-export const useFetch = (items, deps = []) => {
+export const useFetch = (items) => {
 
     const [state, setState] = useState({
         data: [],
@@ -15,39 +15,48 @@ export const useFetch = (items, deps = []) => {
         hasError: false
     })
 
-    
+    const response = () => {
+        setInterval(() => {
+            try {
+                Promise.all(items.map((item) => getService.get(item, {
+                    validateStatus: function (status) {
+                        return status !== 500
+                    }
+                })
+                    .catch(error => {
+                        const findedElement = testData.find(element => element.config.url === error.config.url);
+
+                        // console.log('error: ' + JSON.stringify(findedElement))
+
+                        if(!findedElement) {
+                            testData.push({ ...error })
+                        }
+                    })))
+
+                    .then(((res) => {
+                        setState({ ...state, data: res, isLoading: false })
+                    }))
+
+            }
+            catch (error) {
+                setState({
+                    ...state,
+                    hasError: error
+                })
+            }
+        }, 11000);
+    }
+
     useEffect(() => {
-        try {
-            Promise.all(items.map((item) => getService.get(item, {
-                validateStatus: function (status) {
-                    return status !== 500
-                }
-            })
-                .catch(error => {
-                    setState({ ...state, isLoading: false, data: error })
-                    testData.push({ ...error })
 
-                })))
+        response()
 
-                .then(((res) => {
-                    setState({ ...state, data: res, isLoading: false })
-                }))
-
-        }
-        catch (error) {
-            setState({
-                ...state,
-                hasError: error
-            })
-        }
     }, [])
 
+    // console.log(testData)
 
-    // console.log(state);
-    // console.log(testData);
 
     const data = getData(state, testData)
-
 
     return {
         data: data,
