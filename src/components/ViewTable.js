@@ -1,33 +1,46 @@
+import { useFetch } from '../hooks/useFetch';
+
+
 import { CircularProgress, Grid, IconButton, Toolbar, Typography } from '@mui/material'
 import AutorenewIcon from '@mui/icons-material/Autorenew';
+import { Box } from '@mui/system';
 
 import { Table } from "antd";
 import "antd/dist/antd.css";
 
 
-import { useFetch } from '../hooks/useFetch';
-import { Box } from '@mui/system';
 import { items, columnas, onChange } from '../data/items';
+import { getCompare, getData, getElementByPath } from '../helpers';
 
 
 
 
 export const ViewTable = () => {
 
-    let urls = items;
+    const urls = items;
     const columns = columnas;
 
-    const response = useFetch(urls, [])
+    const response = useFetch(urls)
+    const { state, testData } = response;
 
-    const { data, isLoading, hasError } = response;
-    // console.log(data)
+
+    const dataToSave = getElementByPath(state);
+
+    const FinalData = getCompare(state, dataToSave);
+
+
+
+
+
+
+
+    
+    const data = getData(state, testData)
 
 
     const handleReload = () => {
         window.location.reload();
     }   
-
-    
 
 
     return (

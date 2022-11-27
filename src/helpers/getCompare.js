@@ -1,17 +1,12 @@
 
-export const getCompare = ( dataStorage, dataResponse ) => {
+export const getCompare = ( state, dataToSave ) => {
 
     const dataProcesada = [];
 
-    console.log(dataStorage)
+    //! AQUI VA LA LOGICA PARA COMPARAR LAS LISTAS Y COLOCAR LAS FECHAS
+    console.log(state);
+    console.log(dataToSave);
 
-    if ( dataResponse?.length && dataStorage?.length > 0 ) {
-
-        dataResponse.map( (item, index) => {
-            console.log('HOLAAAAAAAA')
-
-        })
-    }
 
 
     return dataProcesada;
