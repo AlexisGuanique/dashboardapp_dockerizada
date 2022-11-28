@@ -4,6 +4,8 @@ import { getStorage } from "./getStorage";
 export const getElementByPath = (data) => {
 
     const { setLocalStorage, getLocalStorage } = getStorage();
+    
+    let dataToSave = [];
 
 
     //? -------------------------------------------------------------------------------
@@ -14,47 +16,37 @@ export const getElementByPath = (data) => {
     //? -------------------------------------------------------------------------------
 
 
-    const dataToSave = [];
 
-    const dataStorage = getLocalStorage('dataToSave');
+
     try {
-        if (!dataStorage) {
-            setLocalStorage('dataToSave', dataToSave);
+        if (!getLocalStorage('dataToSave') || getLocalStorage('dataToSave').length === 0) {
+            setLocalStorage('dataToSave', data);
+            dataToSave.push(getLocalStorage('dataToSave'));
         }
     } catch (error) {
-        console.log(`dataToSave encontrado`)
+        console.log(`Ya hay un registro en el localStorage con ese nombre`)
     }
+
+    console.log(dataToSave);
 
 
     data.forEach((item) => {
+
         if (item && item.status >= 200 && item.status <= 299) {
 
-            // * //////////////////////////////////////////////////////////////
-            // * Esto era cuando tenemos un array con varias url's repetidas
-            const findedElement = dataToSave.find(element => element?.path === item?.config?.url);
-
+            const findedElement = dataToSave.find(element => element?.config?.url === item?.config?.url);
+            
             if (!findedElement) {
-                dataToSave.push({
-                    path: item.config.url,
-                    status: item.status,
-                    date: horaActual
-                })
+                item['date'] = horaActual;
             }
-            // * //////////////////////////////////////////////////////////////
-
+            setLocalStorage('dataToSave', data);
         }
+
     })
+    console.log(data)
     
 
-    try {
-        if (!dataStorage || dataStorage.length === 0) {
-            setLocalStorage('dataToSave', dataToSave)
-        }
-    } catch (error) {
-        console.log(error)
-    }
-
-    return dataToSave;
+    return data;
 
 
 }

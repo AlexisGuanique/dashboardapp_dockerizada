@@ -10,7 +10,7 @@ import "antd/dist/antd.css";
 
 
 import { items, columnas, onChange } from '../data/items';
-import { getCompare, getData, getElementByPath } from '../helpers';
+import { getData, getElementByPath } from '../helpers';
 
 
 
@@ -25,28 +25,15 @@ export const ViewTable = () => {
     const { state, testData } = response;
     const { data } = state;
 
-
-
-
-
-    const dataToSave = getElementByPath(data);
-
-    const FinalData = getCompare(data, dataToSave);
-
-
-
-
-
-
-
+    const dataProcesada = getElementByPath(data);
     
-    const dataLista = getData(state, testData)
+    const new_data = getData(dataProcesada, testData)
+
 
 
     const handleReload = () => {
         window.location.reload();
     }   
-
 
     return (
         <>
@@ -74,9 +61,9 @@ export const ViewTable = () => {
                     className='animate__animated animate__fadeIn animate__delay-3s'
                 >
                     {
-                        (!dataLista.length)
+                        (!new_data.length)
                         ? <CircularProgress />
-                        : <Table columns={columns} dataSource={dataLista} pagination={{ pageSize: 8 }} onChange={onChange} />
+                        : <Table columns={columns} dataSource={new_data} pagination={{ pageSize: 8 }} onChange={onChange} />
                     }                    
 
 
