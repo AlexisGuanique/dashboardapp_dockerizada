@@ -1,26 +1,20 @@
 import { v4 as uuidv4 } from 'uuid';
 
 
-export const getData = (state, testData) => {
-
-    const date = new Date();
-    const [month, day, year, hour, minute, second] = [date.getMonth(), date.getDate(), date.getFullYear(), date.getHours(), date.getMinutes(), date.getSeconds()]
-    const horaActual = (`${day}/${month}/${year} - ${hour}:${minute}:${second} h`);
-
+export const getData = (dataProcesada, testData) => {
 
     const new_data = []
 
-    const { data } = state;
 
-    if (data.length) {
-        data.map((item) => {
+    if (dataProcesada.length) {
+        dataProcesada.map((item) => {
             if (item) {
                 new_data.push({
                     key: uuidv4(),
                     direccion: item?.request?.responseURL,
                     status: item?.status,
                     state: (item?.status) === 200 ? '🟢' : '🔴',
-                    fecha: (item?.status) === 200 ? horaActual : null,
+                    fecha: item?.date,
                     statustext: (item?.status) === 200 ? 'OK' : item?.data
                 });
             }

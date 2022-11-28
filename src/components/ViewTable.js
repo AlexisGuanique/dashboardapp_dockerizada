@@ -10,38 +10,30 @@ import "antd/dist/antd.css";
 
 
 import { items, columnas, onChange } from '../data/items';
-import { getCompare, getData, getElementByPath } from '../helpers';
+import { getData, getElementByPath } from '../helpers';
 
 
 
 
 export const ViewTable = () => {
 
-    const urls = items;
     const columns = columnas;
 
+    const urls = items;
     const response = useFetch(urls)
+
     const { state, testData } = response;
+    const { data } = state;
 
-
-    const dataToSave = getElementByPath(state);
-
-    const FinalData = getCompare(state, dataToSave);
-
-
-
-
-
-
-
+    const dataProcesada = getElementByPath(data);
     
-    const data = getData(state, testData)
+    const new_data = getData(dataProcesada, testData)
+
 
 
     const handleReload = () => {
         window.location.reload();
     }   
-
 
     return (
         <>
@@ -69,9 +61,9 @@ export const ViewTable = () => {
                     className='animate__animated animate__fadeIn animate__delay-3s'
                 >
                     {
-                        (!data.length)
+                        (!new_data.length)
                         ? <CircularProgress />
-                        : <Table columns={columns} dataSource={data} pagination={{ pageSize: 8 }} onChange={onChange} />
+                        : <Table columns={columns} dataSource={new_data} pagination={{ pageSize: 8 }} onChange={onChange} />
                     }                    
 
 
@@ -106,3 +98,9 @@ export const ViewTable = () => {
 
     )
 }
+
+// ! 1.- Recupero almacenamiento local
+
+// ! 2.- Adentro de un unico forEach donde proceso la data que viene de la respuesta, para cada elemento
+// !    * Si tengo 200 almaceno o actualizo el localStorage con el dato positivo (getElementByPath)
+// !    * Guardo en data.date el dato actualizado del localStorage

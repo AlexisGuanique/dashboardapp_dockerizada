@@ -1,41 +1,52 @@
 import { getStorage } from "./getStorage";
 
 
-export const getElementByPath = (state) => {
+export const getElementByPath = (data) => {
 
-    console.log(state);
+    const { setLocalStorage, getLocalStorage } = getStorage();
+    
+    let dataToSave = [];
+
 
     //? -------------------------------------------------------------------------------
     //? Hora actual
-
     const date = new Date();
     const [month, day, year, hour, minute, second] = [date.getMonth(), date.getDate(), date.getFullYear(), date.getHours(), date.getMinutes(), date.getSeconds()]
     const horaActual = (`${day}/${month}/${year} - ${hour}:${minute}:${second} h`);
-
     //? -------------------------------------------------------------------------------
 
 
-    const dataToSave = [];
 
-    state.data.forEach((item) => {
-        if (item && item.status >= 200 && item.status < 299 ) {
-            const findedElement = dataToSave.find(element => element?.path === item?.config?.url);
-            if (!findedElement) {
-                dataToSave.push({
-                    path: item.config.url,
-                    status: item.status,
-                    date: horaActual
-                })
-            }
 
+    try {
+        if (!getLocalStorage('dataToSave') || getLocalStorage('dataToSave').length === 0) {
+            setLocalStorage('dataToSave', data);
+            dataToSave.push(getLocalStorage('dataToSave'));
         }
+    } catch (error) {
+        console.log(`Ya hay un registro en el localStorage con ese nombre`)
+    }
+
+    console.log(dataToSave);
+
+
+    data.forEach((item) => {
+
+        if (item && item.status >= 200 && item.status <= 299) {
+
+            const findedElement = dataToSave.find(element => element?.config?.url === item?.config?.url);
+            
+            if (!findedElement) {
+                item['date'] = horaActual;
+            }
+            setLocalStorage('dataToSave', data);
+        }
+
     })
+    console.log(data)
+    
 
-    const { setLocalStorage, getLocalStorage } = getStorage();
+    return data;
 
-    setLocalStorage('dataToSave', dataToSave)
 
-    console.log(getLocalStorage('dataToSave'))
-
-    return {dataToSave}
 }
