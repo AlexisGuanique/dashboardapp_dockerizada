@@ -46,7 +46,7 @@ export const ViewTable = () => {
 
 
                 <Typography
-                    className='animate__animated animate__backInUp animate__delay-2s'
+                    className='animate__animated animate__fadeInUp'
                     variant='h3'
                     noWrap component='div'
 
@@ -55,13 +55,11 @@ export const ViewTable = () => {
                 </Typography>
                 <Toolbar />
 
-                <Box
-                    className='animate__animated animate__fadeIn animate__delay-3s'
-                >
+                <Box>
                     {
                         (!new_data.length)
-                        ? <CircularProgress />
-                        : <Table columns={columns} dataSource={new_data} pagination={{ pageSize: 8 }} onChange={onChange} />
+                        ? <CircularProgress sx={{ marginTop: 15}} />
+                        : <Table className='animate__animated animate__backInUp' columns={columns} dataSource={new_data} pagination={{ pageSize: 8 }} onChange={onChange} />
                     }                    
 
 
@@ -78,7 +76,7 @@ export const ViewTable = () => {
                         ':hover': { backgroundColor: 'secondary.main', opacity: 0.9 },
                         position: 'fixed',
                         right: 50,
-                        bottom: 70
+                        bottom: 30
                     }}
                 >
 

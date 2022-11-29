@@ -40,7 +40,7 @@ export const useFetch = (items) => {
                     hasError: error
                 })
             }
-        }, 5000);
+        }, 10000);
 
 
     }

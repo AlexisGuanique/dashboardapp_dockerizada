@@ -6,11 +6,7 @@ import {
     Typography
 } from '@mui/material';
 
-
-
 export const SideBar = ({ drawerWidth }) => {
-
-
 
     return (
         <Box
@@ -30,13 +26,20 @@ export const SideBar = ({ drawerWidth }) => {
             >
 
                 <Toolbar>
-
                     <Typography variant='h6' noWrap component='div' color='white'>
-                        DASHBOARD 
+                        DASHBOARD APP
                     </Typography>
                 </Toolbar>
 
-                <Divider />
+                <Divider 
+                    sx={{
+                        color: 'black',
+                        backgroundColor: '#6e9fc7',
+                        width: '100%',
+                        height: 5
+                    }}
+                />
+
 
 
             </Drawer>
