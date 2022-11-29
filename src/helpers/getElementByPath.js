@@ -23,7 +23,7 @@ export const getElementByPath = (data) => {
         console.log(error)
     }
 
-    console.log(dataToSave);
+    // console.log(dataToSave);
 
     data.forEach((item) => {
 
@@ -40,7 +40,7 @@ export const getElementByPath = (data) => {
 
     setLocalStorage('dataToSave', data);
 
-    console.log(data)
+    // console.log(data)
 
     return data;
 
