@@ -29,8 +29,6 @@ export const ViewTable = () => {
     
     const new_data = getData(dataProcesada, testData)
 
-
-
     const handleReload = () => {
         window.location.reload();
     }   

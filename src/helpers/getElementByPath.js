@@ -1,12 +1,10 @@
 import { getStorage } from "./getStorage";
 
-
 export const getElementByPath = (data) => {
 
     const { setLocalStorage, getLocalStorage } = getStorage();
 
     let dataToSave = [];
-
 
     //? -------------------------------------------------------------------------------
     //? Hora actual
@@ -15,21 +13,17 @@ export const getElementByPath = (data) => {
     const horaActual = (`${day}/${month}/${year} - ${hour}:${minute}:${second} h`);
     //? -------------------------------------------------------------------------------
 
-
-
-
     try {
         dataToSave = getLocalStorage('dataToSave');
 
-        if (!getLocalStorage('dataToSave') || getLocalStorage('dataToSave').length === 0) {
+        if (!dataToSave || dataToSave.length === 0) {
             dataToSave = data;
         }
     } catch (error) {
-        console.log(`Ya hay un registro en el localStorage con ese nombre`)
+        console.log(error)
     }
 
     console.log(dataToSave);
-
 
     data.forEach((item) => {
 
@@ -48,8 +42,6 @@ export const getElementByPath = (data) => {
 
     console.log(data)
 
-
     return data;
-
 
 }
