@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import { getService } from "../api/getService";
+import { getService } from "../dashboard/api/getService";
 
 
 const testData = [];

@@ -1,4 +1,4 @@
-import { useFetch } from '../hooks/useFetch';
+import { useFetch } from '../../hooks/useFetch';
 
 
 import { CircularProgress, Grid, IconButton, Toolbar, Typography } from '@mui/material'
@@ -10,7 +10,8 @@ import "antd/dist/antd.css";
 
 
 import { items, columnas, onChange } from '../data/items';
-import { getData, getElementByPath } from '../helpers';
+import { getData, getElementByPath } from '../helpers'
+import { DashboardLayout } from '../layout/DashboardLayout';
 
 
 
@@ -34,7 +35,7 @@ export const ViewTable = () => {
     }   
 
     return (
-        <>
+        <DashboardLayout>
             <Grid
                 container
                 spacing={0}
@@ -90,7 +91,7 @@ export const ViewTable = () => {
 
 
             </Grid>
-        </>
+        </DashboardLayout>
 
     )
 }
