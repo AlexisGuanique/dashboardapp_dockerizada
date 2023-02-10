@@ -1,6 +1,5 @@
 import { useFetch } from '../../hooks/useFetch';
 
-
 import { CircularProgress, Grid, IconButton, Toolbar, Typography } from '@mui/material'
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 import { Box } from '@mui/system';
@@ -12,8 +11,6 @@ import "antd/dist/antd.css";
 import { items, columnas, onChange } from '../data/items';
 import { getData, getElementByPath } from '../helpers'
 import { DashboardLayout } from '../layout/DashboardLayout';
-
-
 
 
 export const ViewTable = () => {
@@ -44,7 +41,6 @@ export const ViewTable = () => {
                 justifyContent='center'
                 sx={{ minHeight: 'calc(100vh - 110px)', backgroundColor: 'white', borderRadius: 3 }}
             >
-
 
                 <Typography
                     className='animate__animated animate__fadeInUp'
@@ -83,11 +79,7 @@ export const ViewTable = () => {
 
                     <AutorenewIcon sx={{ fontSize: 30 }} />
 
-
                 </IconButton>
-
-
-
 
 
             </Grid>
@@ -95,9 +87,3 @@ export const ViewTable = () => {
 
     )
 }
-
-// ! 1.- Recupero almacenamiento local
-
-// ! 2.- Adentro de un unico forEach donde proceso la data que viene de la respuesta, para cada elemento
-// !    * Si tengo 200 almaceno o actualizo el localStorage con el dato positivo (getElementByPath)
-// !    * Guardo en data.date el dato actualizado del localStorage

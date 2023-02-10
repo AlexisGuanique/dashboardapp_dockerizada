@@ -42,7 +42,6 @@ export const useFetch = (items) => {
             }
         }, 10000);
 
-
     }
 
     useEffect(() => {

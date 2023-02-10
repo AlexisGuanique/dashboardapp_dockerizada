@@ -13,7 +13,7 @@ export const AppRoutes = () => {
     
     return (
         <Routes>
-{/* 
+            {/* 
             {
                 (status === 'authenticated')
                 ? <Route path="/*" element={ <DashboardRoutes /> } />
