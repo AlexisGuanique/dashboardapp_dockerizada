@@ -29,7 +29,8 @@ export const ViewTable = () => {
 
     const handleReload = () => {
         window.location.reload();
-    }   
+    }
+
 
     return (
         <DashboardLayout>

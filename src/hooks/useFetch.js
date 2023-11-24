@@ -32,7 +32,6 @@ export const useFetch = (items) => {
                     .then(((res) => {
                         setState({ ...state, data: res, isLoading: false })
                     }))
-
             }
             catch (error) {
                 setState({
@@ -49,7 +48,6 @@ export const useFetch = (items) => {
         response()
 
     }, []);
-
 
     return {
         state: state,
